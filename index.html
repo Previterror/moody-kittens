@@ -15,9 +15,9 @@
   <header class="bg-dark d-flex align-items-center p-1 space-between">
     <img src="moody-logo.png" height="60" alt="Moody Kittens">
     <form class="" onsubmit="addKitten(event)">
-      <div class="d-flex">
+      <div id="kittenForm" class="d-flex">
         <input placeholder="Name" type="text" name="name" />
-        <button class="btn-special" type="submit">
+        <button class="btn-special" type="submit" onsubmit="addKitten(event)">
           /ᐠ｡ꞈ｡ᐟ\
         </button>
       </div>
