@@ -49,7 +49,6 @@ function loadKittens() {
 function drawKittens() {
   kittens.forEach(kitten =>{
     document.getElementById("kittens").innerText += ` ${kitten.name} `
-    console.log(kitten.name)
   })
 }
 
@@ -60,6 +59,18 @@ function drawKittens() {
  * @return {Kitten}
  */
 function findKittenById(id) {
+  let ret;
+
+  kittens.forEach(kittenByID =>{
+    //console.log(kittenByID.id)
+    //console.log(id)
+
+    if (kittenByID.id == id){
+      ret = kittenByID
+    }
+ })
+ console.log(ret)
+ return ret;
 }
 
 
@@ -72,6 +83,13 @@ function findKittenById(id) {
  * @param {string} id 
  */
 function pet(id) {
+  let affectionChange = Math.random()
+  let kitten = findKittenById()
+
+  kittens[affection] = affectionChange
+  console.log(affectionChange)
+  console.log(kitten)
+  console.log(kitten)
 }
 
 /**
