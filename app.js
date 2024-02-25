@@ -1,6 +1,5 @@
 let kittens = []
 loadKittens()
-drawKittens()
 
 /**
  * Called when submitting the new Kitten Form
@@ -16,11 +15,20 @@ function addKitten(event) {
   let kitten = {
     id: generateId(),
     name: form.name.value,
+    affection: 0,
+    mood: "neutral"
+  }
+
+  if (kittens.includes(`${kitten.name}`)) {
+    throw new Error("A kitten that name is already here!")
+  } else {
+    kittens.push(kitten)
+    saveKittens()
+    form.reset()
+    console.log("Saved")
+  }
 }
-kittens.push(kitten)
-saveKittens()
-form.reset()
-}
+
 
 /**
  * Converts the kittens array to a JSON string then
@@ -47,7 +55,7 @@ function loadKittens() {
  * Draw all of the kittens to the kittens element
  */
 function drawKittens() {
-  kittens.forEach(kitten =>{
+  kittens.forEach(kitten => {
     document.getElementById("kittens").innerText += ` ${kitten.name} `
   })
 }
@@ -61,16 +69,13 @@ function drawKittens() {
 function findKittenById(id) {
   let ret;
 
-  kittens.forEach(kittenByID =>{
-    //console.log(kittenByID.id)
-    //console.log(id)
-
-    if (kittenByID.id == id){
+  kittens.forEach(kittenByID => {
+    if (kittenByID.id == id) {
       ret = kittenByID
     }
- })
- console.log(ret)
- return ret;
+  })
+  console.log(ret)
+  return ret;
 }
 
 
@@ -84,12 +89,12 @@ function findKittenById(id) {
  */
 function pet(id) {
   let affectionChange = Math.random()
-  let kitten = findKittenById()
+  let kitten = findKittenById(id)
 
-  kittens[affection] = affectionChange
-  console.log(affectionChange)
-  console.log(kitten)
-  console.log(kitten)
+  if (affectionChange > .5) {
+    kitten.affection += affectionChange
+  }
+  // setKittenMood()
 }
 
 /**
@@ -99,20 +104,37 @@ function pet(id) {
  * @param {string} id
  */
 function catnip(id) {
+  let kitten = findKittenById(id)
+  kitten.affection = 5
+  kitten.mood = "tolerant"
+  console.log(kitten, kitten.affection)
+  // setKittenMood()
 }
 
 /**
  * Sets the kittens mood based on its affection
  * @param {Kitten} kitten 
  */
-function setKittenMood(kitten) {
+function setKittenMood(id) {
+  let kitten = (id)
+
+  if (kitten.affection >= 8) {
+    kitten.mood = "affectionate"
+  } else if (kitten.affection >= 6 && kitten.affection < 8) {
+    kitten.mood = "friendly"
+  } else if (kitten.affection >= 3 && kitten.affection < 6) {
+    kitten.mood = "tolerant"
+  } else {
+    kitten.mood = "moody"
+  }
+
 }
 
 /**
  * Removes all of the kittens from the array
  * remember to save this change
  */
-function clearKittens(){
+function clearKittens() {
 }
 
 /**
@@ -121,7 +143,7 @@ function clearKittens(){
  */
 function getStarted() {
   document.getElementById("welcome").remove();
-  console.log('Good Luck, Take it away')
+  drawKittens()
 }
 
 
@@ -129,7 +151,7 @@ function getStarted() {
 
 /**
  * Defines the Properties of a Kitten
- * @typedef {{id:sting, name: string, mood: string, affection: number}} Kitten
+ * @typedef {{id:string, name: string, mood: string, affection: number}} Kitten
  */
 
 
