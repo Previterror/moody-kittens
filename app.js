@@ -16,7 +16,7 @@ function addKitten(event) {
     id: generateId(),
     name: form.name.value,
     affection: 0,
-    mood: "neutral"
+    mood: "neutral",
   }
 
   if (kittens.includes(`${kitten.name}`)) {
@@ -94,7 +94,9 @@ function pet(id) {
   if (affectionChange > .5) {
     kitten.affection += affectionChange
   }
-  // setKittenMood()
+  setKittenMood(id)
+  console.log(kitten.affection)
+  console.log(affectionChange)
 }
 
 /**
@@ -106,9 +108,8 @@ function pet(id) {
 function catnip(id) {
   let kitten = findKittenById(id)
   kitten.affection = 5
-  kitten.mood = "tolerant"
+  setKittenMood(id)
   console.log(kitten, kitten.affection)
-  // setKittenMood()
 }
 
 /**
@@ -116,18 +117,20 @@ function catnip(id) {
  * @param {Kitten} kitten 
  */
 function setKittenMood(id) {
-  let kitten = (id)
+  let kitten = findKittenById(id)
 
   if (kitten.affection >= 8) {
     kitten.mood = "affectionate"
+
   } else if (kitten.affection >= 6 && kitten.affection < 8) {
     kitten.mood = "friendly"
+
   } else if (kitten.affection >= 3 && kitten.affection < 6) {
     kitten.mood = "tolerant"
+
   } else {
     kitten.mood = "moody"
   }
-
 }
 
 /**
@@ -135,6 +138,10 @@ function setKittenMood(id) {
  * remember to save this change
  */
 function clearKittens() {
+  window.localStorage.removeItem("kittens")
+  kittens = []
+  drawKittens()
+  console.log("Cleared")
 }
 
 /**
