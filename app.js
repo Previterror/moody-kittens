@@ -1,5 +1,6 @@
 let kittens = []
 loadKittens()
+getStarted()
 
 /**
  * Called when submitting the new Kitten Form
@@ -27,6 +28,7 @@ function addKitten(event) {
     form.reset()
     console.log("Saved")
   }
+  drawKittens()
 }
 
 
@@ -55,9 +57,18 @@ function loadKittens() {
  * Draw all of the kittens to the kittens element
  */
 function drawKittens() {
+  if (kittens.length < 1){
+  document.getElementById("kittens").innerText = ""
+  }else{
   kittens.forEach(kitten => {
-    document.getElementById("kittens").innerText += ` ${kitten.name} `
-  })
+    document.getElementById("kittens").innerHTML += 
+
+    `<div class="kitten">
+      <p class="kitten-name">${kitten.name}</p>
+      <p class="kitten-mood">${kitten.mood}</p>            
+    </div>`;
+    
+  })}
 }
 
 
@@ -120,16 +131,17 @@ function setKittenMood(id) {
   let kitten = findKittenById(id)
 
   if (kitten.affection >= 8) {
-    kitten.mood = "affectionate"
+    kitten.mood = "Happy"
+    
 
   } else if (kitten.affection >= 6 && kitten.affection < 8) {
-    kitten.mood = "friendly"
+    kitten.mood = "Tolerant"
 
   } else if (kitten.affection >= 3 && kitten.affection < 6) {
-    kitten.mood = "tolerant"
+    kitten.mood = "Angry"
 
   } else {
-    kitten.mood = "moody"
+    kitten.mood = "Gone"
   }
 }
 
@@ -141,7 +153,6 @@ function clearKittens() {
   window.localStorage.removeItem("kittens")
   kittens = []
   drawKittens()
-  console.log("Cleared")
 }
 
 /**

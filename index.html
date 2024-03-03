@@ -23,13 +23,13 @@
       </div>
     </form>
     <div>
-      <button class="btn-clear" type="submit" onsubmit="clearKittens()">
+      <button class="btn-clear" onclick="clearKittens()">
         /ᐠ-ꞈ-ᐟ\
       </button>
     </div>
   </header>
   <main class="container">
-    <div id="welcome" class="d-flex justify-content-center">
+    <!-- <div id="welcome" class="d-flex justify-content-center">
       <div class="card p-2 text-center w-50">
         <img src="moody-logo.png" height="250" alt="Moody Kittens">
         <div class="mt-2">
@@ -40,11 +40,18 @@
           <button onclick="getStarted()">Get Started</button>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="p-2">
-      <div id="kittens" class="d-flex align-items-center flex-wrap">
+      <div class="d-flex align-items-center flex-wrap">
+        <div id="kittens">
+<!-- this is where kittens are added-->
+          <!-- <div class="kitten">
+            <p class="kitten-name">[Name]</p>
+            <p class="kitten-mood">[Mood]</p>            
+          </div> -->
+        </div>
       </div>
-  </main>
+    </main>
   <footer class="card bg-dark text-light p-2 d-flex align-items-center justify-content-center">
     <small>Created with <span style="color: var(--primary)">&hearts;</span> by CodeWorks</small>
   </footer>
