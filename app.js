@@ -55,20 +55,66 @@ function loadKittens() {
 
 /**
  * Draw all of the kittens to the kittens element
- */
+*/
 function drawKittens() {
-  if (kittens.length < 1){
-  document.getElementById("kittens").innerText = ""
-  }else{
-  kittens.forEach(kitten => {
-    document.getElementById("kittens").innerHTML += 
+  //let kitten = findKittenById(id)
 
-    `<div class="kitten">
-      <p class="kitten-name">${kitten.name}</p>
-      <p class="kitten-mood">${kitten.mood}</p>            
-    </div>`;
-    
-  })}
+  if (kittens.length < 1) {
+    document.getElementById("kittens").innerText = ""
+  } else {
+    kittens.forEach(kitten => {
+      let id = kitten.id;
+      document.getElementById("kittens").innerHTML +=
+
+        `<div id="${kitten.name}" class="kitten character">
+    <p class="kitten-name">${kitten.name}</p>
+    <img class="kitten" style="width:75px; height:75px" src="https://media.istockphoto.com/id/1204008191/vector/symbolic-cute-cat-face.jpg?s=612x612&w=0&k=20&c=hon014JKW91q7sPJw21t358xnhmq8UiFhfUYtW4XcBQ="></img>
+    <p class="kitten-mood">${kitten.mood}</p>
+    <button onclick="pet('${id}')">
+        Pet
+      </button>
+      <button onclick="catnip('${id}')">
+      Catnip
+      </button>
+      </div>`
+
+      assignMoodClass(id)
+      console.log(id)
+    })
+  }
+}
+
+function assignMoodClass(id) {
+  let kitten = findKittenById(id)
+
+  if (kitten.mood == "Happy") {
+    document.getElementById(`${kitten.name}`).classList.remove("tolerant")
+    document.getElementById(`${kitten.name}`).classList.remove("angry")
+    document.getElementById(`${kitten.name}`).classList.remove("gone")
+    document.getElementById(`${kitten.name}`).classList.add("happy")
+  }
+
+  if (kitten.mood == "Tolerant") {
+    document.getElementById(`${kitten.name}`).classList.remove("happy")
+    document.getElementById(`${kitten.name}`).classList.remove("angry")
+    document.getElementById(`${kitten.name}`).classList.remove("gone")
+    document.getElementById(`${kitten.name}`).classList.add("tolerant")
+  }
+
+  if (kitten.mood == "Angry") {
+    document.getElementById(`${kitten.name}`).classList.remove("tolerant")
+    document.getElementById(`${kitten.name}`).classList.remove("happy")
+    document.getElementById(`${kitten.name}`).classList.remove("gone")
+    document.getElementById(`${kitten.name}`).classList.add("angry")
+  }
+
+  if (kitten.mood == "Gone") {
+    document.getElementById(`${kitten.name}`).classList.remove("tolerant")
+    document.getElementById(`${kitten.name}`).classList.remove("angry")
+    document.getElementById(`${kitten.name}`).classList.remove("happy")
+    document.getElementById(`${kitten.name}`).classList.add("gone")
+  }
+
 }
 
 
@@ -103,7 +149,7 @@ function pet(id) {
   let kitten = findKittenById(id)
 
   if (affectionChange > .5) {
-    kitten.affection += affectionChange
+    kitten.affection += 1
   }
   setKittenMood(id)
   console.log(kitten.affection)
@@ -132,7 +178,7 @@ function setKittenMood(id) {
 
   if (kitten.affection >= 8) {
     kitten.mood = "Happy"
-    
+
 
   } else if (kitten.affection >= 6 && kitten.affection < 8) {
     kitten.mood = "Tolerant"
@@ -143,6 +189,8 @@ function setKittenMood(id) {
   } else {
     kitten.mood = "Gone"
   }
+  saveKittens()
+  drawKittens()
 }
 
 /**
