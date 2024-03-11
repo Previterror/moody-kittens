@@ -19,8 +19,8 @@ function addKitten(event) {
     affection: 6,
     mood: "",
 
-    setKittenMood()
   }
+  setKittenMood()
 
   if (kittens.includes(`${kitten.name}`)) {
     throw new Error("A kitten that name is already here!")
