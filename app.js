@@ -59,6 +59,7 @@ function loadKittens() {
 function drawKittens() {
   //let kitten = findKittenById(id)
 
+  document.getElementById("kittens").innerHTML = ""
   if (kittens.length < 1) {
     document.getElementById("kittens").innerText = ""
   } else {
