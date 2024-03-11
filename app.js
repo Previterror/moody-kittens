@@ -16,7 +16,7 @@ function addKitten(event) {
   let kitten = {
     id: generateId(),
     name: form.name.value,
-    affection: 0,
+    affection: 6,
     mood: "neutral",
   }
 
