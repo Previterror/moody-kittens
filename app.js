@@ -16,13 +16,17 @@ function addKitten(event) {
   let kitten = {
     id: generateId(),
     name: form.name.value,
-    affection: 6,
+    affection: "6",
     mood: "",
 
   }
-  setKittenMood()
+  console.log(kitten.name)
 
-  if (kittens.includes(`${kitten.name}`)) {
+  let existingKitten = kittens.find(submittedKitten => submittedKitten.name === `${kitten.name}`)
+
+  console.log(existingKitten)
+
+  if (existingKitten != null) {
     throw new Error("A kitten that name is already here!")
   } else {
     kittens.push(kitten)
@@ -30,6 +34,7 @@ function addKitten(event) {
     form.reset()
     console.log("Saved")
   }
+  setKittenMood(kitten.id)
   drawKittens()
 }
 
@@ -130,11 +135,12 @@ function findKittenById(id) {
   let ret;
 
   kittens.forEach(kittenByID => {
+
     if (kittenByID.id == id) {
       ret = kittenByID
     }
   })
-  console.log(ret)
+  console.log('🐈', ret)
   return ret;
 }
 
