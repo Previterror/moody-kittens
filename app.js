@@ -17,7 +17,9 @@ function addKitten(event) {
     id: generateId(),
     name: form.name.value,
     affection: 6,
-    mood: "neutral",
+    mood: "",
+
+    setKittenMood()
   }
 
   if (kittens.includes(`${kitten.name}`)) {
